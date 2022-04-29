@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie-edge"> -->
+    <link rel="stylesheet" href="./style.css">
+    <title>Superior Sports Stats - MLB Pitching Analyzer</title>
+    <script src="https://kit.fontawesome.com/1b15334d96.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;700&family=Montserrat:wght@200;400;500&display=swap" rel="stylesheet">
+
+</head>
+
+
+
+<body>
+
+    <div class="groupContainer">
+        <header>
+            <div class="page_title"> MLB Player Hitting Analyzer </div>
+            <div class="page_sport_logo"> <i class="fas fa-baseball-ball" style="font-size:40px;color:lightslategray";></i></div>
+        </header>
+        
+        <div class="tool_container">
+            <div class="PlayerComparisonTool">
+                <div id="Player1_Tool">
+                Player 1:
+                <input type="text" id="player1Name" name="player1Name" size="10">
+                <button type="button" onclick="searchForPlayer('player1Name')">Search</button>
+                <div class="PlayerResults" id="Player1Results">
+    
+                </div>
+                </div>
+        
+            </div>
+            <div class="PlayerComparisonTool">
+                <div id="Player2_Tool">
+                Player 2:
+                <input type="text" id="player2Name" name="player2Name" size="10">
+                <button type="button" onclick="searchForPlayer('player2Name')">Search</button>
+                <div class="PlayerResults" id="Player2Results">
+                    
+                </div>
+                </div>
+            </div>
+        </div>
+    
+
+        <div class="navigation_bar">
+            <h4>Select player comparison tool:</h4>
+                    <!-- <i class="fas fa-basketball-ball" style="font-size:40px;color:slategray"; fa-fw id=basketballButton></i>
+                    <i class="fas fa-futbol" style="font-size:40px;color:slategray"; fa-fw id=soccerButton></i>
+                    <i class="fas fa-baseball-ball" style="font-size:40px;color:slategray"; fa-fw id=baseballButton></i> -->
+                <div class="navigation_links">
+                    <div id="basketball_link">
+                        <a href="./basketball.html"> <i class="fas fa-basketball-ball" style="font-size:40px;color:lightslategray"; fa-fw id=basketballButton></i></a>
+                    </div>
+    
+                    <div id="soccer_link">
+                        <a href="./soccer.html"> <i class="fas fa-futbol" style="font-size:40px;color:lightslategray"; fa-fw id=soccerButton></i></a>
+                    </div>
+    
+                    <div id="baseball_link">
+                        <a href="./baseball.html"> <i class="fas fa-baseball-ball" style="font-size:40px;color:lightslategray"; fa-fw id=baseballButton></i></a>
+                    </div>
+                </div>
+        </div>
+    
+        <script src="baseball.js"></script>
+    
+        <div class="statSources">
+            Statistics provided by <a href="https://rapidapi.com/theapiguy/api/mlb-data">theapiguy</a>
+        </div>
+    
+        <footer>
+                
+            <div class="footer_menu">
+                <div class="footer_menu_container">
+                    <a href="./index.html">Home</a>
+                    <form action="" method="POST">
+                        <label for="email"> Subscribe: </label> <input type="text" id="email" name="email">
+                        <button type="button" onclick="postSubscribe()">Submit</button>
+                    </form>
+                    <div>
+                    <i class="far fa-copyright"></i> 2020
+                    </div>
+                </div>
+            </div>
+        
+        
+            <script>
+                function postSubscribe() {
+                    var email = document.getElementById('email').value;
+                    var req = new XMLHttpRequest();
+                    req.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+                            var response = JSON.parse(req.responseText);
+                            var responseString = response.data;
+                            document.getElementById("dataForm").innerHTML +=
+                            responseString;}
+                    }
+                    
+                    req.open("POST", "http://web.engr.oregonstate.edu/~zhangluy/tools/class-content/form_tests/check_request.php", false);
+                    req.setRequestHeader('Content-Type', 'application/json');
+                    req.send(`{"Subscribe":${email}}`);
+                };
+            </script>
+            
+        </footer>
+    </div>
+</body>
+
+
+
+</html>

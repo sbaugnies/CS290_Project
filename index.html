@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie-edge"> -->
+    <link rel="stylesheet" href="./style.css">
+    <title>Superior Sports Stats</title>
+    <script src="https://kit.fontawesome.com/1b15334d96.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;700&family=Montserrat:wght@200;400;500&display=swap" rel="stylesheet">
+
+</head>
+
+<header>
+    <div class="page_title"> Superior Sports Stats </div>
+</header>
+
+<body>
+    <div class="carousel-container">
+            <i class="fa fa-chevron-left" id="prevButton"></i>
+            <i class="fa fa-chevron-right" id="nextButton"></i>
+        <div class="carousel-slide">
+            <img src="./img/baseball_5.jpg"     id="lastClone" alt="">
+            <img src="./img/basketball_1.jpg"   alt="">
+            <img src="./img/soccer_1.jpg"       alt="">
+            <img src="./img/baseball_5.jpg"     alt="">
+            <img src="./img/basketball_1.jpg"   id="firstClone" alt="">
+        </div>
+    </div>
+
+    <div class="navigation_bar">
+        <h4>Select player comparison tool:</h4>
+                <!-- <i class="fas fa-basketball-ball" style="font-size:40px;color:slategray"; fa-fw id=basketballButton></i>
+                <i class="fas fa-futbol" style="font-size:40px;color:slategray"; fa-fw id=soccerButton></i>
+                <i class="fas fa-baseball-ball" style="font-size:40px;color:slategray"; fa-fw id=baseballButton></i> -->
+            <div class="navigation_links">
+                <div id="basketball_link">
+                    <a href="./basketball.html"> <i class="fas fa-basketball-ball" style="font-size:40px;color:lightslategray"; fa-fw id=basketballButton></i></a>
+                </div>
+
+                <div id="soccer_link">
+                    <a href="./soccer.html"> <i class="fas fa-futbol" style="font-size:40px;color:lightslategray"; fa-fw id=soccerButton></i></a>
+                </div>
+
+                <div id="baseball_link">
+                    <a href="./baseball.html"> <i class="fas fa-baseball-ball" style="font-size:40px;color:lightslategray"; fa-fw id=baseballButton></i></a>
+                </div>
+            </div>
+    </div>
+   
+
+    <!-- <button id="prevButton">Previous</button>
+    <button id="nextButton">Next</button> -->
+
+
+    <script src="app.js"></script>
+    
+</body>
+    
+    <footer>
+        
+        <div class="footer_menu">
+            <div class="footer_menu_container">
+                <a href="#home" class="active">Home</a>
+                <a href="./image_sources.pdf" download>Download Image Sources</a> 
+                <form action="" method="POST">
+                    <label for="email"> Subscribe: </label> <input type="text" id="email" name="email">
+                    <button type="button" onclick="postSubscribe()">Submit</button>
+                </form>
+                <div>
+                <i class="far fa-copyright"></i> 2020
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+            function postSubscribe() {
+                var email = document.getElementById('email').value;
+                var req = new XMLHttpRequest();
+                req.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var response = JSON.parse(req.responseText);
+                        var responseString = response.data;
+                        document.getElementById("dataForm").innerHTML +=
+                        responseString;}
+                }
+                
+                req.open("POST", "http://web.engr.oregonstate.edu/~zhangluy/tools/class-content/form_tests/check_request.php", false);
+                req.setRequestHeader('Content-Type', 'application/json');
+                req.send(`{"Subscribe":${email}}`);
+            };
+        </script>
+        
+    </footer>
+    
+</html>
